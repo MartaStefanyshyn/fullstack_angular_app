@@ -17,9 +17,13 @@ var users = [
 export function index(req, res) {
   // res.json(users);
   console.log(req.headers);
-  var user = users.find(function(res) { console.log(res.token); return res.token === req.headers.auth});
-  console.log(user);
-  if (!!user && user.token === req.headers.auth && user.date == new Date().getDate()) {
+  var user = users.find(function(res) { console.log(res.token); return res.token === req.headers.authorization});
+  console.log(users.indexOf(user));
+  // var expireDate = (Date.now() - user.date) < 10000;
+  if (!!user){
+    var expireDate = (Date.now() - user.date) < 30000;
+  }
+  if (!!user && user.token === req.headers.authorization && expireDate) {
     res.send(user);
   } else {
     res.statusCode = 401;
@@ -29,11 +33,11 @@ export function index(req, res) {
 
 export function create(req, res) {
     var user = users.find(function(res) {return res.name === req.body.name});
-    console.log(user);
+    console.log(users.indexOf(user));
     if (user && user.password === req.body.password) {
         var newToken = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
         user.token = newToken;
-        user.date = new Date().getDate();
+        user.date = Date.now();
         console.log(users);
 
         res.send(newToken)
