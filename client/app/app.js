@@ -14,6 +14,9 @@ import uiBootstrap from 'angular-ui-bootstrap';
 import {
   routeConfig
 } from './app.config';
+import {
+  runFunction
+} from './app.run';
 
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
@@ -27,7 +30,8 @@ import './app.scss';
 angular.module('angularFullstackApp', [ngCookies, ngResource, ngSanitize, uiRouter, uiBootstrap,
     navbar, footer, main, constants, util, dashbord
   ])
-  .config(routeConfig);
+  .config(routeConfig)
+  .run(runFunction);
 
 angular.element(document)
   .ready(() => {

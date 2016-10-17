@@ -3,8 +3,7 @@ import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
 
 export class MainController {
-
-  awesomeThings = [];
+  
   token = '';
 
   /*@ngInject*/
@@ -19,22 +18,9 @@ export class MainController {
         date: ''
     }
   }
-
-  checkAuth() {
-    console.log(this.token)
-    this.$http({
-      method: 'GET',
-      url: '/api/things',
-      headers: {
-        'Authorization': this.token
-      }
-    }).then(response => {
-        this.awesomeThings = response.data;
-      });
-
-  }
+  
   createUser(credentials) {
-    this.$http.post('/api/things', credentials)
+    this.$http.post('/api/login', credentials)
       .then(response => {
       this.token = response.data;
       this.$cookieStore.put('session', response.data);

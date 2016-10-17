@@ -12,16 +12,19 @@ export class DashbordController {
   }
 
   checkAuth() {
-    let token = this.$cookieStore.get('session')
+    let token = this.$cookieStore.get('session');
     this.$http({
       method: 'GET',
-      url: '/api/things',
+      url: '/api/login',
       headers: {
         'Authorization': token
       }
-    }).then(response => {
-      console.log(response.data);
-  });
+    }).then(() => {
+      alert("You are logged in");
+    }).catch((resp) => {
+      this.$cookieStore.remove('session');
+      this.$state.go('main');
+    });
 
   }
 }

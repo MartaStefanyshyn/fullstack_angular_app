@@ -4,7 +4,7 @@ var app = require('../..');
 import request from 'supertest';
 
 describe('Thing API:', function() {
-  describe('GET /api/things', function() {
+  describe('GET /api/login', function() {
     var things;
 
     beforeEach(function(done) {

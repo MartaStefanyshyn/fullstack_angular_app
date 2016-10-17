@@ -1,13 +1,14 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/things              ->  index
+ * GET     /api/login              ->  index
  */
 
 'use strict';
 
-// Gets a list of Things
+// Gets a list of Users
 var users = [
-  {   'name':'igor',
+  {
+    'name':'user',
     'password':'123',
     'token':'',
     'date':''
@@ -15,11 +16,7 @@ var users = [
 ];
 
 export function index(req, res) {
-  // res.json(users);
-  console.log(req.headers);
   var user = users.find(function(res) { console.log(res.token); return res.token === req.headers.authorization});
-  console.log(users.indexOf(user));
-  // var expireDate = (Date.now() - user.date) < 10000;
   if (!!user){
     var expireDate = (Date.now() - user.date) < 30000;
   }
@@ -42,7 +39,6 @@ export function create(req, res) {
 
         res.send(newToken)
     } else {
-        console.log('sorry');
         res.statusCode = 401;
         res.send('sorry')
     }

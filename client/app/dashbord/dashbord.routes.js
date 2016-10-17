@@ -3,8 +3,13 @@
 export default function routes($stateProvider) {
   'ngInject';
 
+
+
   $stateProvider.state('dashbord', {
     url: '/dashbord',
-    template: '<dashbord></dashbord>'
+    template: '<dashbord></dashbord>',
+    data: {
+      'noLogin': false
+    }
   });
 }
